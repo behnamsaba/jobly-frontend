@@ -3,7 +3,6 @@ import { useContext } from "react";
 import UserContext from "../auth/UserContext";
 const FormProfile = () => {
   const { user, profileChange } = useContext(UserContext);
-  console.log(user);
 
   const formik = useFormik({
     initialValues: {
