@@ -1,3 +1,7 @@
+### About the project
+Jobly is a web application for job seekers to find and apply to job listings. This project includes the server-side code in Node.js, with a PostgreSQL database, and uses popular npm packages for web development such as Express.js, bcrypt, jsonwebtoken, and others.
+it includes backend and frontend.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +72,41 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### About the project
+Jobly is a web application for job seekers to find and apply to job listings. This project includes the server-side code in Node.js, with a PostgreSQL database, and uses popular npm packages for web development such as Express.js, bcrypt, jsonwebtoken, and others.
+it includes backend and frontend.
+
+(https://dictionaryapi.dev/)
+
+### Built With
+
+
+* @testing-library/jest-dom
+* @testing-library/react
+* @testing-library/user-event
+* axios
+* formik
+* jsonwebtoken
+* jwt-decode
+* react
+* react-dom
+* react-router-dom
+* react-scripts
+* reactstrap
+* web-vitals
+* yup
+* PostgreSQL
+
+
+
+
+### API
+We will be using the following
+backend:
+To access backend project website, [Click here](https://github.com/behnamsaba/jobly-backend)
+
+
+### The title of project website and a link
+
+To access project website, [Click here](https://equal-frog.surge.sh/)
