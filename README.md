@@ -3,7 +3,7 @@
 Jobly is a web application for job seekers to find and apply to job listings. This project includes the server-side code in Node.js, with a PostgreSQL database, and uses popular npm packages for web development such as Express.js, bcrypt, jsonwebtoken, and others.
 it includes backend and frontend.
 
-- Click [here](equal-frog.surge.sh) to explore the live project.
+- Click [here](https://equal-frog.surge.sh/) to explore the live project.
 - Click [here](https://github.com/behnamsaba/jobly-backend) to explore the see the backend.
 
 # Getting Started with Create React App
