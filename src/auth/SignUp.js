@@ -6,8 +6,7 @@ import UserContext from './UserContext';
 
 const SignUp = () => {
     const { register } = useContext(UserContext);
-        const navigate = useNavigate();
-
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -17,12 +16,12 @@ const SignUp = () => {
             lastName: '',
             email: '',
         },
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             try {
-                register(values)
+                await register(values);
                 navigate('/');
             } catch (e) {
-                formik.setErrors({ backendError: e });
+                formik.setErrors({ backendError: e.message });
             }
         },
         validationSchema: Yup.object({
@@ -30,68 +29,60 @@ const SignUp = () => {
             password: Yup.string().required('Required'),
             firstName: Yup.string().required('Required'),
             lastName: Yup.string().required('Required'),
-            email: Yup.string().email('invalid email').required('Required'),
+            email: Yup.string().email('Invalid email').required('Required'),
         }),
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input
-                id="username"
-                type="text"
-                {...formik.getFieldProps('username')}
-            />
-            {formik.touched.username && formik.errors.username ? (
-                <p>{formik.errors.username}</p>
-            ) : null}
+        <form
+            onSubmit={formik.handleSubmit}
+            className='max-w-md mx-auto my-10 p-8 border border-gray-300 rounded-lg shadow-lg'>
+            <h2 className='text-lg font-semibold text-center text-gray-800 mb-6'>
+                Sign Up
+            </h2>
 
-            <label htmlFor="passwrod">Password</label>
-            <input
-                id="password"
-                type="password"
-                {...formik.getFieldProps('password')}
-            />
-            {formik.touched.password && formik.errors.password ? (
-                <p>{formik.errors.password}</p>
-            ) : null}
+            {/* Repeated form fields */}
+            {['username', 'password', 'firstName', 'lastName', 'email'].map(
+                (field) => (
+                    <div
+                        key={field}
+                        className='mb-4'>
+                        <label
+                            htmlFor={field}
+                            className='block text-sm font-medium text-gray-700'>
+                            {field.charAt(0).toUpperCase() + field.slice(1)}
+                        </label>
+                        <input
+                            id={field}
+                            type={field === 'password' ? 'password' : 'text'}
+                            {...formik.getFieldProps(field)}
+                            className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md ${
+                                formik.touched[field] && formik.errors[field]
+                                    ? 'border-red-500'
+                                    : ''
+                            }`}
+                        />
+                        {formik.touched[field] && formik.errors[field] && (
+                            <p className='mt-2 text-sm text-red-600'>
+                                {formik.errors[field]}
+                            </p>
+                        )}
+                    </div>
+                )
+            )}
 
-            <label htmlFor="firstName">First Name</label>
-            <input
-                id="firstName"
-                type="text"
-                {...formik.getFieldProps('firstName')}
-            />
-            {formik.touched.firstName && formik.errors.firstName ? (
-                <p>{formik.errors.firstName}</p>
-            ) : null}
+            {/* Backend error handling */}
+            {formik.errors.backendError && (
+                <div className='my-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded'>
+                    {formik.errors.backendError}
+                </div>
+            )}
 
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                id="lastName"
-                type="text"
-                {...formik.getFieldProps('lastName')}
-            />
-            {formik.touched.lastName && formik.errors.lastName ? (
-                <p>{formik.errors.lastName}</p>
-            ) : null}
-
-            <label htmlFor="email">Email</label>
-            <input
-                id="email"
-                type="text"
-                {...formik.getFieldProps('email')}
-            />
-            {formik.touched.email && formik.errors.email ? (
-                <p>{formik.errors.email}</p>
-            ) : null}
-
-            {/* backend error handling*/}
-            {formik.errors.backendError ? (
-                <div>{formik.errors.backendError}</div>
-            ) : null}
-
-            <button type="submit">Join</button>
+            <button
+                type='submit'
+                className='w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                Join
+            </button>
         </form>
     );
 };

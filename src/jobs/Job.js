@@ -1,50 +1,50 @@
-import {
-  Card,
-  CardBody,
-  CardText,
-  CardTitle,
-  ListGroup,
-  ListGroupItem,
-} from "reactstrap";
-import { useContext, useState, useEffect } from "react";
-import UserContext from "../auth/UserContext";
+import { useContext, useState, useEffect } from 'react';
+import UserContext from '../auth/UserContext';
+import { FaDollarSign } from 'react-icons/fa';
 
 const Job = ({ id, title, companyName, salary, equity }) => {
-  const { hasAppliedToJob, applyToJob, user } = useContext(UserContext);
-  const [applied, setApplied] = useState();
+    const { hasAppliedToJob, applyToJob, user } = useContext(UserContext);
+    const [applied, setApplied] = useState();
 
-  useEffect(() => {
-    setApplied(hasAppliedToJob(id));
-  }, [id, hasAppliedToJob]);
+    useEffect(() => {
+        setApplied(hasAppliedToJob(id));
+    }, [id, hasAppliedToJob]);
 
-  const handleApply = async () => {
-    if (hasAppliedToJob(id)) return;
-    applyToJob(id);
-    setApplied(true);
-  };
-  return (
-    <Card>
-      <CardBody className='text-center'>
-        <CardTitle>
-          <h4 className='font-weight-bold'>{title}</h4>
-        </CardTitle>
-        <CardText>
-          <p>{companyName}</p>
-        </CardText>
-      </CardBody>
-      <ListGroup>
-        <ListGroupItem>Salary: {salary}</ListGroupItem>
-        <ListGroupItem>Equity: {equity}</ListGroupItem>
+    const handleApply = async () => {
+        if (hasAppliedToJob(id)) return;
+        applyToJob(id);
+        setApplied(true);
+    };
 
-        {user ? (
-          <button className='Job-btn' onClick={handleApply} disabled={applied}>
-            {applied ? "Applied" : "Apply"}
-          </button>
-        ) : null}
-      </ListGroup>
+    const formatSalary = (salary) => {
+        return salary ? `$${salary.toLocaleString()}` : 'Not disclosed';
+    };
 
-    </Card>
-  );
+    return (
+        <div className='p-2 border-2 border-white rounded-lg shadow-sm mb-4'>
+            <h3 className='text-lg font-semibold'>{title}</h3>
+            <p className='text-gray-600 font-semibold'>{companyName}</p>
+            <div className='my-2'>
+                <p className='flex items-center text-slate-800'>
+                    <FaDollarSign className='mr-1' />
+                    {formatSalary(salary)}
+                </p>
+                <p className='text-slate-800'>Equity | {equity ? equity : 'None'}</p>
+            </div>
+            {user && (
+                <button
+                    onClick={handleApply}
+                    disabled={applied}
+                    className={`mt-1 px-3 py-1 text-sm rounded text-white ${
+                        applied
+                            ? 'bg-gray-400'
+                            : 'bg-blue-500 hover:bg-blue-600'
+                    } transition-colors`}>
+                    {applied ? 'Applied' : 'Apply'}
+                </button>
+            )}
+        </div>
+    );
 };
 
 export default Job;
