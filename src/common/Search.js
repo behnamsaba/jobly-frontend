@@ -29,29 +29,31 @@ const Search = () => {
     });
 
     return (
-        <form
-            onSubmit={formik.handleSubmit}
-            className='max-w-sm w-full my-10 rounded'>
-            <div className='flex items-center border-b border-teal-500 py-2'>
-                <input
-                    id='name'
-                    type='text'
-                    {...formik.getFieldProps('name')}
-                    placeholder='Enter Search Term for Company or Role'
-                    className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
-                />
-                <button
-                    type='submit'
-                    className='flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'>
-                    Search
-                </button>
-            </div>
-            {formik.errors.backendError && (
-                <div className='text-red-500 text-xs italic'>
-                    {formik.errors.backendError}
+        <div className="flex justify-center items-center">
+            <form
+                onSubmit={formik.handleSubmit}
+                className='max-w-sm w-full my-10 rounded block'>
+                <div className='flex items-center border-b border-teal-500 py-2'>
+                    <input
+                        id='name'
+                        type='text'
+                        {...formik.getFieldProps('name')}
+                        placeholder='Enter Search Term for Company or Role'
+                        className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
+                    />
+                    <button
+                        type='submit'
+                        className='flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'>
+                        Search
+                    </button>
                 </div>
-            )}
-        </form>
+                {formik.errors.backendError && (
+                    <div className='text-red-500 text-xs italic'>
+                        {formik.errors.backendError}
+                    </div>
+                )}
+            </form>
+        </div>
     );
 };
 
