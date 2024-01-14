@@ -7,7 +7,7 @@ const SearchResult = () => {
     const { jobs = [], companies = [] } = location.state || {};
 
     return (
-        <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+        <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 h-screen'>
             <h2 className='text-center font-bold text-lg'>Search Results</h2>
             {jobs.length === 0 && companies.length === 0 && (
                 <h3 className='text-center font-bold text-base pt-5'>
